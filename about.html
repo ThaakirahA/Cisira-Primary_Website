@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Cisira Combined Primary School</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+/* Team Section Enhancements */
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.team-member {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(40, 97, 129, 0.2);
+}
+
+.team-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    /* REMOVED ANY BORDER-RADIUS TO KEEP SQUARE */
+    border-radius: 0;
+}
+
+.team-member:hover .team-image {
+    transform: scale(1.1);
+}
+
+.team-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 45, 98, 0.9));
+    color: white;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover .team-overlay {
+    transform: translateY(0);
+}
+
+.team-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.team-role {
+    font-size: 0.9rem;
+    color: #00AEEF;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.view-details {
+    background: #286181;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.view-details:hover {
+    background: #00AEEF;
+}
+
+/* Animation Controls */
+.animation-controls {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.animate-btn {
+    background: #286181;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.animate-btn:hover {
+    background: #002D62;
+    transform: translateY(-2px);
+}
+
+.animate-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Modal Styles */
+.team-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 15px;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #286181;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.close-modal:hover {
+    background: #00AEEF;
+}
+
+.modal-body {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.modal-image {
+    flex: 0 0 300px;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    /* SQUARE IMAGES IN MODAL */
+    border-radius: 0;
+    border: 4px solid #286181;
+}
+
+.modal-info {
+    flex: 1;
+}
+
+.modal-info h3 {
+    color: #002D62;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.modal-role {
+    color: #00AEEF;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.modal-description {
+    color: #002D62;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+/* Team member data container */
+#teamData {
+    display: none;
+}
+
+/* Animation for team members */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.team-member.animating {
+    animation: pulse 0.5s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .modal-body {
+        flex-direction: column;
+    }
+    
+    .modal-image {
+        flex: 0 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .modal-image img {
+        width: 300px;
+        height: 300px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 400px;
+        margin: 40px auto 0;
+    }
+    
+    .team-image-wrapper {
+        height: 250px;
+    }
+    
+    .animate-btn {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+    
+    .animation-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+    }
+    
+    .modal-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-role {
+        font-size: 1rem;
+    }
+    
+    .modal-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-container {
+        padding: 1rem;
+    }
+    
+    .team-image-wrapper {
+        height: 200px;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+}
+
+/* REMOVED CIRCULAR IMAGE FALLBACK STYLING */
+/* .team-image {
+    background: linear-gradient(135deg, #E5E5E5 0%, #d1e3f0 100%);
+}
+
+.team-image:before {
+    content: "👨‍🏫";
+    font-size: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #286181;
+} */
+
+/* Ensure team section matches the rest of the page */
+#team .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#team .section-header h2 {
+    color: #002D62;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+#team .section-header p {
+    color: #002D62;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+</style>
+    <meta name="description" content="Learn about Cisira Combined Primary School's journey, mission to provide quality education, core values, and our dedicated teaching staff.">
+    <meta name="keywords" content="primary school Peddie, quality education, school mission, teaching staff, school values">
+</head>
+
+<body class="about-page-body">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-3 shadow-sm">
+        <div class="container">
+            <img src="assets/logo.png" alt="Cisira Primary Logo" width="80" class="d-inline-block align-text-top me-2" />
+            <a class="navbar-brand fw-bold" href="index.html">Cisira Combined Primary</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="donate.html">Donations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-hero">
+        <div class="hero-content">
+            <h2>Our Commitment to Quality Education</h2>
+            <p>For generations, we've been shaping young minds through balanced education and strong moral values</p>
+        </div>
+    </section>
+
+    <section class="section-nav">
+        <div class="section-nav-container">
+            <ul class="section-nav-list">
+                <li class="section-nav-item">
+                    <a href="#story" class="section-nav-link active" data-section="story">
+                        <i class="fas fa-history"></i>
+                        Our Story
+                    </a>
+                </li>
+                <li class="section-nav-item">
+                    <a href="#mission" class="section-nav-link" data-section="mission">
+                        <i class="fas fa-bullseye"></i>
+                        Our Mission
+                    </a>
+                </li>
+                <li class="section-nav-item">
+                    <a href="#policies" class="section-nav-link" data-section="policies">
+                        <i class="fas fa-file-alt"></i>
+                        School Policies
+                    </a>
+                </li>
+                <li class="section-nav-item">
+                    <a href="#team" class="section-nav-link" data-section="team">
+                        <i class="fas fa-users"></i>
+                        Our Team
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <section id="story" class="content-section active">
+            <div class="section-header">
+                <h2>Our Story</h2>
+                <p>From humble beginnings to educational excellence - our journey of growth and impact</p>
+            </div>
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>From Humble Beginnings to Educational Excellence</h3>
+                    <p>Cisira Combined Primary School began with a vision to provide quality education to the children of Peddie. What started as a small community initiative has grown into a respected educational institution.</p>
+                    <p>Today, we continue our legacy of academic excellence, character development, and community service, preparing students for success in secondary education and beyond.</p>
+                    <div class="impact-stats">
+                        <div class="stat">
+                            <span class="stat-number" data-count="120">0</span>
+                            <span class="stat-label">Total number learners</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="10">0</span>
+                            <span class="stat-label">Qualified Teachers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" data-count="98">0</span>
+                            <span class="stat-label">Pass Rate %</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <img src="assets/cisira.jpg" alt="Cisira School Building and Campus">
+                </div>
+            </div>
+        </section>
+
+        <section id="mission" class="content-section">
+            <div class="section-header">
+                <h2>Our Mission & Vision</h2>
+                <p>Guiding principles that shape our educational approach and community values</p>
+            </div>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h3>Our Commitment to Balanced Education</h3>
+                    <p>We believe every child deserves access to quality education that develops both academic skills and strong character. Our mission is threefold:</p>
+                    <ul class="mission-list">
+                        <li><i class="fas fa-graduation-cap"></i> <strong>Academic Excellence:</strong> Provide comprehensive education meeting national standards</li>
+                        <li><i class="fas fa-heart"></i> <strong>Character Development:</strong> Instill morality, discipline, and respect for all</li>
+                        <li><i class="fas fa-users"></i> <strong>Community Preparation:</strong> Prepare students for secondary education and life beyond</li>
+                    </ul>
+                    <div class="mission-vision">
+                        <div class="vision-box">
+                            <h4>Our Vision</h4>
+                            <p>To provide learners with knowledge, skills, attitude, and values needed in life and prepare them for secondary education, ensuring what they experience from us will benefit them in future.</p>
+                        </div>
+                        <div class="motto-box">
+                            <h4>Our Motto</h4>
+                            <p class="motto-text">"WOBABONA NGEZI QHAMOZABO"</p>
+                            <p class="motto-meaning">Excellence Through Perseverance</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mission-image">
+                    <img src="assets/students3.jpg" alt="Students learning in our classrooms">
+                </div>
+            </div>
+        </section>
+
+        <section id="policies" class="content-section">
+            <div class="section-header">
+                <h2>School Policies</h2>
+                <p>Clear guidelines and expectations for a safe, productive learning environment</p>
+            </div>
+            <div class="policies-container">
+                <div class="policy-dropdown-nav">
+                    <h3>Select a Policy Category</h3>
+                    <div class="policy-nav-grid">
+                        <div class="policy-nav-item active" data-policy="aim">
+                            <div class="policy-nav-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <span>Policy Aims</span>
+                        </div>
+                        <div class="policy-nav-item" data-policy="rights">
+                            <div class="policy-nav-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <span>Rights & Responsibilities</span>
+                        </div>
+                        <div class="policy-nav-item" data-policy="attendance">
+                            <div class="policy-nav-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <span>School Attendance</span>
+                        </div>
+                        <div class="policy-nav-item" data-policy="uniform">
+                            <div class="policy-nav-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <span>Grooming & Uniform</span>
+                        </div>
+                        <div class="policy-nav-item" data-policy="discipline">
+                            <div class="policy-nav-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <span>Discipline Policy</span>
+                        </div>
+                        <div class="policy-nav-item" data-policy="values">
+                            <div class="policy-nav-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <span>School Values</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-content-section active" id="policy-aim">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Policy Aims</h3>
+                        <div class="policy-badge">Core</div>
+                    </div>
+                    <div class="policy-content">
+                        <p>This policy aims to establish clear and consistent expectations for all members of our school community:</p>
+                        <div class="policy-item">Establish a <strong>disciplined environment</strong> conducive to effective education and growth.</div>
+                        <div class="policy-item">Protect the <strong>rights and safety</strong> of all learners and staff.</div>
+                        <div class="policy-item">Ensure learners uphold the school's reputation with <strong>pride and positive conduct</strong>.</div>
+                        <div class="policy-item">Promote <strong>respect</strong> for school property, educators, and fellow learners.</div>
+                    </div>
+                </div>
+
+                <div class="policy-content-section" id="policy-rights">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>Rights & Responsibilities</h3>
+                        <div class="policy-badge">Essential</div>
+                    </div>
+                    <div class="policy-content">
+                        <div class="policy-row">
+                            <div class="policy-column">
+                                <h4><i class="fas fa-gavel"></i> Learner Rights</h4>
+                                <div class="policy-item">Right to <strong>learn without disturbance</strong> in a peaceful environment.</div>
+                                <div class="policy-item">Right to <strong>personal safety</strong> and dignity, free from violence.</div>
+                                <div class="policy-item">Right to a <strong>clean, well-maintained</strong> school environment.</div>
+                                <div class="policy-item">Right to a <strong>fair and unbiased hearing</strong> regarding disciplinary matters.</div>
+                            </div>
+                            <div class="policy-column">
+                                <h4><i class="fas fa-tasks"></i> Learner Responsibilities</h4>
+                                <div class="policy-item">Responsibility for <strong>regular and punctual</strong> school attendance.</div>
+                                <div class="policy-item">Responsibility to care diligently for all <strong>school property</strong> and resources.</div>
+                                <div class="policy-item">Responsibility to <strong>respect all educators</strong> and follow school rules consistently.</div>
+                                <div class="policy-item">Responsibility to <strong>respect fellow learners</strong> and promote cooperation.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-content-section" id="policy-attendance">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>School Attendance</h3>
+                    </div>
+                    <div class="policy-content">
+                        <div class="policy-item">Regular and <strong>punctual attendance is mandatory</strong> for all students.</div>
+                        <div class="policy-item">All absences must be substantiated with a <strong>written explanation</strong> from a parent/guardian.</div>
+                        <div class="policy-item">Students feeling unwell during the school day must <strong>report to the school office</strong> immediately.</div>
+                        <div class="policy-item">Administrative permission is <strong>required to leave</strong> the school premises during school hours.</div>
+                        <div class="policy-item">Non-emergency medical appointments should, where possible, be scheduled <strong>outside of school time</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="policy-content-section" id="policy-uniform">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Grooming & Uniform</h3>
+                    </div>
+                    <div class="policy-content">
+                        <div class="policy-row">
+                            <div class="policy-column">
+                                <h4><i class="fas fa-user-check"></i> Personal Grooming</h4>
+                                <div class="policy-item">Nails must be kept <strong>clean, neat, and appropriate</strong> length.</div>
+                                <div class="policy-item">Only <strong>plain watches</strong> and essential <strong>medical bracelets</strong> are permitted (No jewelry).</div>
+                                <div class="policy-item">Cosmetics (e.g., <strong>makeup</strong>) are <strong>strictly prohibited</strong> during school hours.</div>
+                            </div>
+                            <div class="policy-column">
+                                <h4><i class="fas fa-cut"></i> Hair Policy</h4>
+                                <div class="policy-item">Boys: Hair must be <strong>short, neat</strong>, and without <strong>patterns or fashion cuts</strong>.</div>
+                                <div class="policy-item">Girls: Hair must be <strong>neatly tied back, plaited, or braided</strong>.</div>
+                                <div class="policy-item">Only <strong>school-appropriate colors</strong> (e.g., black, navy) for hair accessories are allowed.</div>
+                            </div>
+                        </div>
+                        <div class="highlight-box">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div>
+                                <strong>Strictly Official School Uniform is Mandatory</strong>
+                                <p>The uniform must be worn correctly at all times and maintained in a clean, presentable condition.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy-content-section" id="policy-discipline">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>Serious Misconduct</h3>
+                        <div class="policy-badge">Zero Tolerance</div>
+                    </div>
+                    <div class="policy-content">
+                        <p>All acts of serious misconduct will be dealt with <strong>severely</strong> by the Principal, Disciplinary Committee, and School Governing Body, resulting in formal disciplinary action.</p>
+                        <p><strong>Examples of Zero-Tolerance Offences include:</strong></p>
+                        <div class="policy-item">Possession, use, or distribution of <strong>dangerous weapons, alcohol, or illegal substances</strong>.</div>
+                        <div class="policy-item">Any form of <strong>physical or verbal assault</strong>, fighting, or <strong>bullying</strong>.</div>
+                        <div class="policy-item"><strong>Theft, fraud</strong>, or intentional <strong>vandalism</strong> of school or private property.</div>
+                        <div class="policy-item"><strong>Racism, sexism</strong>, or any other form of malicious discrimination or intimidation.</div>
+                        <div class="policy-item">Gross indecency or <strong>inappropriate public behavior</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="policy-content-section" id="policy-values">
+                    <div class="policy-header">
+                        <div class="policy-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Our Core Values</h3>
+                    </div>
+                    <div class="policy-content">
+                        <p>Our school community is built upon a foundation of core values that guide our actions, decisions, and interactions every day:</p>
+                        <div class="values-grid">
+                            <div class="value-card">
+                                <strong>Respect</strong>
+                                <span>Showing regard for self, others, and property.</span>
+                            </div>
+                            <div class="value-card">
+                                <strong>Integrity</strong>
+                                <span>Being honest and possessing strong moral principles.</span>
+                            </div>
+                            <div class="value-card">
+                                <strong>Excellence</strong>
+                                <span>Striving for the highest quality in all pursuits.</span>
+                            </div>
+                            <div class="value-card">
+                                <strong>Responsibility</strong>
+                                <span>Taking full ownership of one's actions and duties.</span>
+                            </div>
+                            <div class="value-card">
+                                <strong>Cooperation</strong>
+                                <span>Working effectively and harmoniously as a team.</span>
+                            </div>
+                            <div class="value-card">
+                                <strong>Compassion</strong>
+                                <span>Caring for others' well-being.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="content-section">
+            <div class="section-header">
+                <h2>Our Team</h2>
+                <p>Meet the dedicated professionals committed to your child's education and development</p>
+            </div>
+
+            <!-- Animation Controls -->
+            <div class="animation-controls">
+                <button class="animate-btn" id="animateTopRow">
+                    <i class="fas fa-arrow-up"></i> Animate Top Row
+                </button>
+                <button class="animate-btn" id="animateBottomRow">
+                    <i class="fas fa-arrow-down"></i> Animate Bottom Row
+                </button>
+                <button class="animate-btn" id="animateAll">
+                    <i class="fas fa-bolt"></i> Animate All
+                </button>
+            </div>
+
+            <!-- Team Grid with 3x2 Layout -->
+<div class="team-container">
+    <div class="team-grid" id="teamGrid">
+        <!-- Row 1 -->
+        <div class="team-member" data-member="1">
+            <div class="team-image-wrapper">
+                <img src="assets/principal.jpg" alt="Mr. Sandisa Rweqana" class="team-image">
+                <div class="team-overlay">
+                    <div class="team-name">Mr. Sandisa Rweqana</div>
+                    <div class="team-role">Principal</div>
+                    <button class="view-details" data-member="1">View Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-member" data-member="2">
+            <div class="team-image-wrapper">
+                <img src="assets/graderR.jpg" alt="Miss Majezi" class="team-image">
+                <div class="team-overlay">
+                    <div class="team-name">Miss Majezi</div>
+                    <div class="team-role">Grade R Teacher</div>
+                    <button class="view-details" data-member="2">View Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-member" data-member="3">
+            <div class="team-image-wrapper">
+                <img src="assets/Staff.jpg" alt="Ms. Marambana" class="team-image">
+                <div class="team-overlay">
+                    <div class="team-name">Ms. Marambana</div>
+                    <div class="team-role">Foundation Phase Teacher</div>
+                    <button class="view-details" data-member="3">View Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="team-member" data-member="4">
+            <div class="team-image-wrapper">
+                <img src="assets/Staff1.jpg" alt="Ms. Nosiviwe Nomnganga" class="team-image">
+                <div class="team-overlay">
+                    <div class="team-name">Ms. Nosiviwe Nomnganga</div>
+                    <div class="team-role">Admin Clerk</div>
+                    <button class="view-details" data-member="4">View Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-member" data-member="5">
+            <div class="team-image-wrapper">
+                <img src="assets/clark.jpg" alt="Ms. Mtshekisa" class="team-image">
+                <div class="team-overlay">
+                    <div class="team-name">Ms. Mtshekisa</div>
+                    <div class="team-role">Vision Runner & Transformation Champion</div>
+                    <button class="view-details" data-member="5">View Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-member" data-member="6">
+            <div class="team-image-wrapper">
+                <img src="assets/educator.jpg" alt="Ms. Zintle Mqongwana" class="team-image">
+                <div class="team-overlay">
+                    <div class="team-name">Ms. Zintle Mqongwana</div>
+                    <div class="team-role">Educator Assistant</div>
+                    <button class="view-details" data-member="6">View Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Team Member Modal -->
+<div class="team-modal" id="teamModal">
+    <div class="modal-content">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <div class="modal-body" id="modalBody">
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- Team member data (hidden) -->
+<div style="display: none;" id="teamData">
+    <!-- Member 1 Data -->
+    <div data-member="1">
+        <div class="modal-image">
+            <img src="assets/principal.jpg" alt="Mr. Sandisa Rweqana">
+        </div>
+        <div class="modal-info">
+            <h3>Mr. Sandisa Rweqana</h3>
+            <div class="modal-role">Principal</div>
+            <div class="modal-description">
+                I am a dedicated and visionary leader who is passionate about nurturing the holistic development of every child. 
+                With a collaborative approach, I foster a supportive environment where staff, parents, and learners thrive together.
+                I'm committed to building partnerships and exploring initiatives that benefit our school community. My goal is to empower every individual to reach their full potential. 
+                My leadership style is inspired by the quote of Nelson Mandela that states "Before you are a leader, success is all about growing yourself. When you become a leader, success is all about growing others."
+            </div>
+        </div>
+    </div>
+    
+    <!-- Member 2 Data -->
+    <div data-member="2">
+        <div class="modal-image">
+            <img src="assets/graderR.jpg" alt="Miss Majezi">
+        </div>
+        <div class="modal-info">
+            <h3>Miss Majezi</h3>
+            <div class="modal-role">Grade R Teacher</div>
+            <div class="modal-description">
+                I bring 19 years of dedicated experience to the Grade R classroom, shaping a warm and welcoming environment where little ones flourish.
+                With a holistic approach, I foster a love for learning through playing, kindness, and creativity.
+                Gamification and exploration are at the heart of my teaching style, ensuring every child feels safe, valued, and excited to learn. 
+                Join us and let your child feel right at home! Fun fact: I'm a firm believer in the power of laughter and try to start each day with a smile.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Member 3 Data -->
+    <div data-member="3">
+        <div class="modal-image">
+            <img src="assets/Staff.jpg" alt="Ms. Marambana">
+        </div>
+        <div class="modal-info">
+            <h3>Ms. Marambana</h3>
+            <div class="modal-role">Foundation Phase teacher</div>
+            <div class="modal-description">
+                She brings joy and excitement to learning, creating a nurturing environment where little ones can grow and thrive. 
+                With 4 years of experience, she expertly crafts engaging lessons that spark curiosity and creativity. 
+                Her passion for teaching is contagious, making every day a fun-filled adventure.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Member 4 Data -->
+    <div data-member="4">
+        <div class="modal-image">
+            <img src="assets/Staff1.jpg" alt="Ms. Nosiviwe Nomnganga">
+        </div>
+        <div class="modal-info">
+            <h3>Ms. Nosiviwe Nomnganga</h3>
+            <div class="modal-role">Admin Clerk</div>
+            <div class="modal-description">
+                I regard myself as the ambassador of the school and the principal's right-hand person.
+                I keep the school running smoothly with my excellent all-rounder skills. I'm friendly, efficient, and always with a smile.
+                I am the go-to person for staff, learners, and parents alike. With my warm and welcoming aura, I make everyone feel at home. 
+                My dedication and passion for my work truly inspire me, making me an invaluable asset to our school community!
+            </div>
+        </div>
+    </div>
+    
+    <!-- Member 5 Data -->
+    <div data-member="5">
+        <div class="modal-image">
+            <img src="assets/clark.jpg" alt="Ms. Mtshekisa">
+        </div>
+        <div class="modal-info">
+            <h3>Ms. Mtshekisa</h3>
+            <div class="modal-role">Vision Runner and Champion of Transformation</div>
+            <div class="modal-description">
+                I refuse to settle for conformity. Instead, I drive progress and growth at our school. 
+                As a resilient and dedicated teacher, I'm unstoppable in pursuit of excellence. I identify with the eagle, soaring to great heights, 
+                unwavering in my pursuit of what's best for our school. 
+                I won't rest until I secure the resources and support needed to accelerate our school forward.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Member 6 Data -->
+    <div data-member="6">
+        <div class="modal-image">
+            <img src="assets/educator.jpg" alt="Ms. Zintle Mqongwana">
+        </div>
+        <div class="modal-info">
+            <h3>Ms. Zintle Mqongwana</h3>
+            <div class="modal-role">Educator Assistant</div>
+            <div class="modal-description">
+                I am a Charismatic, Professional and Detail- Oriented individual Who believes in growth and effective team building.
+                I support teachers in creating engaging learning experiences and ensure that every student receives the attention they need to succeed.
+            </div>
+        </div>
+    </div>
+</div>
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-button">
+                            What are the school hours and academic calendar?
+                        </button>
+                        <div class="accordion-content">
+                            <p>Our school operates from 7:30 AM to 2:30 PM, Monday through Friday. We follow the Eastern Cape Department of Education academic calendar with four terms per year.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button">
+                            What is the school's approach to discipline?
+                        </button>
+                        <div class="accordion-content">
+                            <p>We maintain high standards of discipline focused on positive reinforcement and character development. Our discipline policy emphasizes respect, responsibility, and restoration.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button">
+                            How can parents get involved in school activities?
+                        </button>
+                        <div class="accordion-content">
+                            <p>We encourage parent involvement through our Parent-Teacher Association, school events, and volunteer opportunities. Regular parent-teacher meetings are scheduled throughout the year.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button">
+                            What support is available for students with learning difficulties?
+                        </button>
+                        <div class="accordion-content">
+                            <p>We provide individualized support for students with learning difficulties through our dedicated teaching staff, including differentiated instruction and additional learning support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <footer class="text-muted">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 footer-school-name">Cisira Combined Primary</p>
+                    <p class="mb-0 footer-copyright">© 2025 reserved by Oblivion.</p>
+                </div>
+
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <span class="footer-contact-text">Get in touch with us here:</span>
+
+                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=principal.200200087@ecschools.org.za&su=Inquiry%20for%20Cisira%20Combined%20Primary%20School&body=Dear%20School%20Administration,%0A%0AI%20would%20like%20to%20inquire%20about:%0A%0A%0A%0ARegards,%0A" 
+                       target="_blank" 
+                       class="social-icon">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61574072707573&mibextid=ZbWKwL" class="social-icon">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamMembers = document.querySelectorAll('.team-member');
+            const teamModal = document.getElementById('teamModal');
+            const modalBody = document.getElementById('modalBody');
+            const closeModal = document.getElementById('closeModal');
+            const teamData = document.getElementById('teamData');
+            
+            // Animation buttons
+            const animateTopRow = document.getElementById('animateTopRow');
+            const animateBottomRow = document.getElementById('animateBottomRow');
+            const animateAll = document.getElementById('animateAll');
+
+            // Function to open modal with team member details
+            function openModal(memberId) {
+                const memberData = teamData.querySelector(`[data-member="${memberId}"]`);
+                if (memberData) {
+                    modalBody.innerHTML = memberData.innerHTML;
+                    teamModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Add image error handling for modal images
+                    const modalImages = modalBody.querySelectorAll('img');
+                    modalImages.forEach(img => {
+                        img.onerror = function() {
+                            const role = memberData.querySelector('.modal-role').textContent;
+                            const colors = {
+                                'Principal': '#286181',
+                                'Grade R Teacher': '#00AEEF',
+                                'Foundation Phase': '#286181',
+                                'Admin Clerk': '#00AEEF',
+                                'Vision Runner': '#286181',
+                                'Educator Assistant': '#00AEEF'
+                            };
+                            const color = colors[role] || '#286181';
+                            this.outerHTML = `<div style="width:100%;height:300px;background:${color};display:flex;align-items:center;justify-content:center;color:white;font-size:4rem;border-radius:10px;border:4px solid #286181;"><i class="fas fa-user-tie"></i></div>`;
+                        };
+                    });
+                }
+            }
+
+            // Function to close modal
+            function closeModalFunc() {
+                teamModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            // Event listeners for view details buttons
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const memberId = button.getAttribute('data-member');
+                    openModal(memberId);
+                });
+            });
+
+            // Event listener for clicking on team members
+            teamMembers.forEach(member => {
+                member.addEventListener('click', () => {
+                    const memberId = member.getAttribute('data-member');
+                    openModal(memberId);
+                });
+            });
+
+            // Event listener for close modal button
+            if (closeModal) {
+                closeModal.addEventListener('click', closeModalFunc);
+            }
+
+            // Close modal when clicking outside
+            teamModal.addEventListener('click', (e) => {
+                if (e.target === teamModal) {
+                    closeModalFunc();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeModalFunc();
+                }
+            });
+
+            // Animation Functions
+            function animateRow(rowNumber) {
+                const start = (rowNumber - 1) * 3;
+                const end = start + 3;
+                
+                for (let i = start; i < end; i++) {
+                    if (teamMembers[i]) {
+                        // Reset animation
+                        teamMembers[i].style.animation = 'none';
+                        void teamMembers[i].offsetWidth; // Trigger reflow
+                        
+                        // Add animation
+                        teamMembers[i].style.animation = 'pulse 0.5s ease';
+                        teamMembers[i].classList.add('animating');
+                        
+                        setTimeout(() => {
+                            teamMembers[i].classList.remove('animating');
+                        }, 500);
+                    }
+                }
+            }
+
+            function animateAllMembers() {
+                teamMembers.forEach((member, index) => {
+                    // Reset animation
+                    member.style.animation = 'none';
+                    void member.offsetWidth; // Trigger reflow
+                    
+                    // Add animation with delay
+                    setTimeout(() => {
+                        member.style.animation = 'pulse 0.5s ease';
+                        member.classList.add('animating');
+                        
+                        setTimeout(() => {
+                            member.classList.remove('animating');
+                        }, 500);
+                    }, index * 100);
+                });
+            }
+
+            // Event listeners for animation buttons
+            if (animateTopRow) {
+                animateTopRow.addEventListener('click', () => animateRow(1));
+            }
+            
+            if (animateBottomRow) {
+                animateBottomRow.addEventListener('click', () => animateRow(2));
+            }
+            
+            if (animateAll) {
+                animateAll.addEventListener('click', animateAllMembers);
+            }
+
+            // Initial animation when page loads
+            setTimeout(() => {
+                if (animateAll) animateAllMembers();
+            }, 1000);
+
+            // Enhanced hover effect
+            teamMembers.forEach(member => {
+                member.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                    this.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                });
+
+                member.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+
+            // Section navigation functionality (existing code)
+            const sectionNavLinks = document.querySelectorAll('.section-nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const policyNavItems = document.querySelectorAll('.policy-nav-item');
+            const policySections = document.querySelectorAll('.policy-content-section');
+
+            // Section navigation
+            sectionNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    sectionNavLinks.forEach(l => l.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Get target section
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Hide all sections
+                    contentSections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show target section
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    // Smooth scroll to section
+                    document.getElementById(targetSection).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+
+            // Policy navigation
+            policyNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const policyType = this.getAttribute('data-policy');
+                    
+                    // Remove active class from all policy items
+                    policyNavItems.forEach(i => i.classList.remove('active'));
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Hide all policy sections
+                    policySections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show selected policy section
+                    document.getElementById(`policy-${policyType}`).classList.add('active');
+                });
+            });
+
+            // Accordion functionality
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const isActive = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    // Close all accordion items
+                    document.querySelectorAll('.accordion-content').forEach(item => {
+                        item.style.maxHeight = null;
+                    });
+                    
+                    // If it wasn't active, open it
+                    if (!isActive) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // Counter animation for stats
+            function animateCounter(element) {
+                const target = parseInt(element.getAttribute('data-count'));
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 30);
+            }
+
+            // Start counter animation when story section is in view
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        statNumbers.forEach(animateCounter);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const storySection = document.getElementById('story');
+            if (storySection) observer.observe(storySection);
+        });
+    </script>
+    <script src="js/script.js"></script>
+    <!-- Add this right before the closing </body> tag on all pages -->
+<!-- Chatbot Floating Button -->
+<div class="chatbot-wrapper">
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+        <span class="notification-badge" id="notificationBadge" style="display: none;">●</span>
+    </button>
+</div>
+
+<!-- Chatbot Container -->
+<div class="chatbot-container" id="chatbotContainer">
+    <div class="chatbot-header">
+        <div class="header-left">
+            <div class="avatar">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="header-info">
+                <h5>Cisira School Assistant</h5>
+                <div class="status">
+                    <span class="status-dot"></span>
+                    <span id="connectionStatus">Online</span>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="header-btn" id="voiceToggle" title="Voice Input">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="header-btn" id="speakerToggle" title="Text-to-Speech">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button class="header-btn" id="clearChat" title="Clear Chat">
+                <i class="fas fa-trash"></i>
+            </button>
+            <button class="header-btn" id="closeChatbot" title="Close Chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Features Bar -->
+    <div class="features-bar">
+        <button class="feature-btn" onclick="showQuickQuestions()" title="Quick Questions">
+            <i class="fas fa-bolt"></i> Quick Help
+        </button>
+        <button class="feature-btn" onclick="showTopics()" title="All Topics">
+            <i class="fas fa-list"></i> Topics
+        </button>
+        <button class="feature-btn" onclick="toggleTheme()" title="Toggle Theme">
+            <i class="fas fa-moon"></i> Theme
+        </button>
+        <button class="feature-btn" onclick="downloadChat()" title="Download Chat">
+            <i class="fas fa-download"></i> Save
+        </button>
+    </div>
+    
+    <div class="chatbot-body" id="chatbotBody">
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <div class="welcome-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h6>👋 Hello! I'm EduBot</h6>
+            <p>Your voice-enabled school assistant. Ask me anything about Cisira Primary!</p>
+            <div class="welcome-buttons">
+                <button class="welcome-btn" onclick="startVoiceAssistant()">
+                    <i class="fas fa-microphone"></i> Voice Command
+                </button>
+                <button class="welcome-btn" onclick="showQuickQuestions()">
+                    <i class="fas fa-question-circle"></i> Quick Questions
+                </button>
+            </div>
+        </div>
+        
+        <!-- Bot's First Message -->
+        <div class="chat-message bot-message">
+            <div class="message-content">
+                <p>I can help you with:</p>
+                <div class="quick-options">
+                    <span class="quick-option" onclick="selectQuickOption('admissions')">
+                        <i class="fas fa-file-signature"></i> Admissions
+                    </span>
+                    <span class="quick-option" onclick="selectQuickOption('academics')">
+                        <i class="fas fa-book"></i> Academics
+                    </span>
+                    <span class="quick-option" onclick="selectQuickOption('fees')">
+                        <i class="fas fa-money-bill-wave"></i> Fees
+                    </span>
+                    <span class="quick-option" onclick="selectQuickOption('contact')">
+                        <i class="fas fa-phone"></i> Contact
+                    </span>
+                </div>
+            </div>
+            <div class="message-actions">
+                <button class="message-action" onclick="speakMessage(this)" title="Speak this message">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="message-action" onclick="copyMessage(this)" title="Copy to clipboard">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <span class="message-time">Just now</span>
+        </div>
+    </div>
+    
+    <div class="chatbot-input">
+        <div class="input-wrapper">
+            <button class="input-action" id="attachFile" title="Attach File">
+                <i class="fas fa-paperclip"></i>
+            </button>
+            <input type="text" id="chatInput" placeholder="Type your message or say 'Hey Edu' for voice..." 
+                   onkeypress="handleChatKeyPress(event)">
+            <button class="input-action voice-btn" id="voiceInputBtn" title="Voice Input (Hold to speak)">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="input-action" id="emojiBtn" title="Emoji">
+                <i class="fas fa-smile"></i>
+            </button>
+        </div>
+        <button class="send-btn" id="sendMessage" title="Send Message">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+    
+    <!-- Voice Status Indicator -->
+    <div class="voice-status" id="voiceStatus" style="display: none;">
+        <div class="voice-animation">
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+            <div class="voice-bar"></div>
+        </div>
+        <span>Listening... Speak now</span>
+        <button class="voice-stop" id="stopVoice">
+            <i class="fas fa-stop"></i> Stop
+        </button>
+    </div>
+    
+    <!-- Quick Questions Modal -->
+    <div class="quick-questions-modal" id="quickQuestionsModal">
+        <div class="modal-header">
+            <h6><i class="fas fa-bolt"></i> Quick Questions</h6>
+            <button class="modal-close" onclick="closeModal('quickQuestionsModal')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- Quick questions will be inserted here by JavaScript -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
