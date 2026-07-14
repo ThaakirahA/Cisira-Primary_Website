@@ -5215,16 +5215,26 @@ footer {
     transition: all 0.3s ease;
 }
 
+
+
+
+
 /* ================================
    EVENTS SECTION
 ================================ */
 
 .events-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    display: flex;
     align-items: center;
+    gap: 40px;
     margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.event-image {
+    flex: 1 1 400px;
+    display: flex;
+    justify-content: center;
 }
 
 .event-image img {
@@ -5232,12 +5242,12 @@ footer {
     max-width: 500px;
     height: auto;
     display: block;
-    margin: 0 auto;
     border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0,0,0,.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .event-details {
+    flex: 1 1 400px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -5248,30 +5258,29 @@ footer {
     padding: 25px;
     border-left: 5px solid #00AEEF;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    transition: all .3s ease;
 }
 
 .event-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,.15);
 }
 
 .event-date {
     display: inline-block;
     background: #286181;
-    color: white;
+    color: #fff;
     padding: 6px 15px;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: .85rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .event-card h3 {
     color: #002D62;
     margin-bottom: 10px;
-    font-size: 1.4rem;
 }
 
 .event-card p {
@@ -5279,27 +5288,47 @@ footer {
     line-height: 1.7;
 }
 
-/* Responsive Design */
+/* Tablets */
 @media (max-width: 992px) {
     .events-container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image,
+    .event-details {
+        width: 100%;
     }
 
     .event-image img {
-        height: 350px;
+        max-width: 450px;
+    }
+
+    .event-card {
+        text-align: left;
     }
 }
 
+/* Phones */
 @media (max-width: 576px) {
-    .event-card {
-        padding: 20px;
-    }
-
-    .event-card h3 {
-        font-size: 1.2rem;
+    .events-container {
+        gap: 25px;
     }
 
     .event-image img {
-        height: 250px;
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    .event-card {
+        padding: 18px;
+    }
+
+    .event-card h3 {
+        font-size: 1.15rem;
+    }
+
+    .event-date {
+        font-size: .8rem;
     }
 }
