@@ -5223,6 +5223,7 @@ footer {
    EVENTS SECTION
 ================================ */
 
+/* Main events layout */
 .events-container {
     display: flex;
     align-items: center;
@@ -5231,6 +5232,7 @@ footer {
     flex-wrap: wrap;
 }
 
+/* Main event image */
 .event-image {
     flex: 1 1 400px;
     display: flex;
@@ -5246,6 +5248,7 @@ footer {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
+/* Event details */
 .event-details {
     flex: 1 1 400px;
     display: flex;
@@ -5253,27 +5256,29 @@ footer {
     gap: 20px;
 }
 
+/* Individual event cards */
 .event-card {
     background: #fff;
     padding: 25px;
     border-left: 5px solid #00AEEF;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    transition: all .3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .event-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
+/* Event date badge */
 .event-date {
     display: inline-block;
     background: #286181;
     color: #fff;
     padding: 6px 15px;
     border-radius: 20px;
-    font-size: .85rem;
+    font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 12px;
 }
@@ -5288,49 +5293,10 @@ footer {
     line-height: 1.7;
 }
 
-/* Tablets */
-@media (max-width: 992px) {
-    .events-container {
-        flex-direction: column;
-        text-align: center;
-    }
 
-    .event-image,
-    .event-details {
-        width: 100%;
-    }
-
-    .event-image img {
-        max-width: 450px;
-    }
-
-    .event-card {
-        text-align: left;
-    }
-}
-
-/* Phones */
-@media (max-width: 576px) {
-    .event-media-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .event-video {
-        grid-column: auto;
-        aspect-ratio: 16 / 9;
-    }
-
-    .event-gallery {
-        margin-top: 40px;
-    }
-}
-/* =================================
-   EVENT GALLERY - IMAGES & VIDEO
-================================= */
-/* =================================
-   EVENT GALLERY - IMAGES & VIDEO
-================================= */
+/* ================================
+   EVENT GALLERY
+================================ */
 
 .event-gallery {
     margin-top: 70px;
@@ -5353,7 +5319,7 @@ footer {
     font-size: 1rem;
 }
 
-/* Desktop: 2-column image layout */
+/* 2-column gallery */
 .event-media-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -5361,7 +5327,7 @@ footer {
     align-items: start;
 }
 
-/* Image/video cards */
+/* Image and video cards */
 .event-media-item {
     position: relative;
     overflow: hidden;
@@ -5371,20 +5337,21 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Keep original image proportions */
+/* IMPORTANT:
+   Keeps vertical images vertical and prevents cropping */
 .event-media-item img {
     width: 100%;
     height: auto;
     display: block;
 }
 
-/* Hover effect */
+/* Gallery hover */
 .event-media-item:hover {
     transform: translateY(-6px);
     box-shadow: 0 16px 35px rgba(0, 45, 98, 0.18);
 }
 
-/* Video spans both desktop columns */
+/* Video takes full width of both columns */
 .event-video {
     grid-column: 1 / -1;
     aspect-ratio: 16 / 9;
@@ -5398,7 +5365,7 @@ footer {
     background: #000;
 }
 
-/* Blue accent line */
+/* Blue line at bottom of gallery items */
 .event-media-item::after {
     content: "";
     position: absolute;
@@ -5410,8 +5377,40 @@ footer {
     pointer-events: none;
 }
 
-/* Tablet */
+
+/* ================================
+   EVENTS - TABLET
+================================ */
+
+@media (max-width: 992px) {
+
+    /* Stack main event image and event cards */
+    .events-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .event-image,
+    .event-details {
+        width: 100%;
+    }
+
+    .event-image img {
+        max-width: 450px;
+    }
+
+    .event-card {
+        text-align: left;
+    }
+}
+
+
+/* ================================
+   EVENT GALLERY - TABLET
+================================ */
+
 @media (max-width: 768px) {
+
     .event-media-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px;
@@ -5426,13 +5425,33 @@ footer {
     }
 }
 
-/* Phone */
+
+/* ================================
+   EVENTS - PHONE
+================================ */
+
 @media (max-width: 576px) {
+
+    .events-container {
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .event-image img {
+        max-width: 100%;
+    }
+
+    .event-card {
+        padding: 20px;
+    }
+
+    /* Gallery becomes one column */
     .event-media-grid {
         grid-template-columns: 1fr;
         gap: 18px;
     }
 
+    /* Video also becomes one column */
     .event-video {
         grid-column: auto;
         aspect-ratio: 16 / 9;
@@ -5440,5 +5459,13 @@ footer {
 
     .event-gallery {
         margin-top: 40px;
+    }
+
+    .event-gallery-header {
+        margin-bottom: 25px;
+    }
+
+    .event-gallery-header h3 {
+        font-size: 1.5rem;
     }
 }
