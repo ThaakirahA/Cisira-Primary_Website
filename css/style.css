@@ -5373,26 +5373,19 @@ footer {
     border-radius: 16px;
     background: #fff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-    aspect-ratio: 3 / 4; /* Portrait/vertical */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-media-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .event-media-item:hover {
     transform: translateY(-6px);
     box-shadow: 0 16px 35px rgba(0, 45, 98, 0.18);
-}
-
-/* Images */
-.event-media-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-}
-
-.event-media-item:hover img {
-    transform: scale(1.05);
 }
 
 /* Video */
@@ -5432,37 +5425,21 @@ footer {
     }
 }
 
-/* Phone */
 @media (max-width: 576px) {
     .event-media-grid {
         grid-template-columns: 1fr;
     }
 
     .event-media-item {
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 3 / 4;
+    }
+
+    .event-video {
+        grid-column: auto;
+        aspect-ratio: 16 / 9;
     }
 
     .event-gallery {
         margin-top: 40px;
-    }
-}
-/* Make the video span both columns */
-.event-video {
-    grid-column: 1 / -1;
-    aspect-ratio: 16 / 9;
-}
-
-/* Keep video from becoming excessively large */
-.event-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #000;
-}
-
-/* Phone */
-@media (max-width: 576px) {
-    .event-video {
-        grid-column: auto;
     }
 }
