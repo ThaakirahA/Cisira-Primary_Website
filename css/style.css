@@ -5373,7 +5373,7 @@ footer {
     border-radius: 16px;
     background: #fff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 4; /* Portrait/vertical */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
